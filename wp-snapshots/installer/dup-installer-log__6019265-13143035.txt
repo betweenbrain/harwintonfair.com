@@ -1,0 +1,401 @@
+********************************************************************************
+* DUPLICATOR-PRO: Install-Log
+* STEP-1 START @ 02:39:10
+* VERSION: 1.3.28
+* NOTICE: Do NOT post to public sites or forums!!
+********************************************************************************
+PACKAGE INFO________ CURRENT SERVER                         |ORIGINAL SERVER
+PHP VERSION_________: 7.1.33                                |7.2.10
+OS__________________: Linux                                 |Darwin
+CREATED_____________: 2020-02-13 14:30:35
+WP VERSION__________: 5.3.2
+DUP VERSION_________: 1.3.28
+DB__________________: 5.6.40
+DB TABLES___________: 13
+DB ROWS_____________: 989
+DB FILE SIZE________: 1.86MB
+********************************************************************************
+SERVER INFO
+PHP_________________: 7.2.10 | SAPI: apache2handler
+PHP MEMORY__________: 4294967296 | SUHOSIN: disabled
+SERVER______________: Apache/2.4.35 (Unix) PHP/7.2.10
+DOC ROOT____________: "/Users/mthomas/www/harwintonfair"
+DOC ROOT 755________: true
+LOG FILE 644________: true
+REQUEST URL_________: "http://harwintonfair.test/dup-installer/main.installer.php"
+********************************************************************************
+USER INPUTS
+ARCHIVE ENGINE______: "shellexec_unzip"
+SET DIR PERMS_______: 1
+DIR PERMS VALUE_____: 1363
+SET FILE PERMS______: 1
+FILE PERMS VALUE____: 1204
+SAFE MODE___________: "0"
+LOGGING_____________: "1"
+CONFIG MODE_________: "NEW"
+FILE TIME___________: "current"
+********************************************************************************
+
+
+--------------------------------------
+ARCHIVE SETUP
+--------------------------------------
+NAME________________: "20200213_harwintonfair_60192653f1ba9a1d9990_20200213143035_archive.zip"
+SIZE________________: 28.1MB
+
+PRE-EXTRACT-CHECKS
+- PASS: Apache '.htaccess' backed-up to .htaccess-200213143910-5e455f8ed4d8d-duplicator.bak
+- PASS: Existing Apache '.htaccess' was removed
+- PASS: Microsoft IIS 'web.config' not found - no backup needed.
+- PASS: WordFence '.user.ini' not found - no backup needed.
+
+
+START ZIP FILE EXTRACTION SHELLEXEC >>> 
+>>> Starting Shell-Exec Unzip:
+Command: unzip -o -qq '/Users/mthomas/www/harwintonfair/20200213_harwintonfair_60192653f1ba9a1d9990_20200213143035_archive.zip' -d '/Users/mthomas/www/harwintonfair' 2>&1
+<<< Shell-Exec Unzip Complete.
+--------------------------------------
+POST-EXTACT-CHECKS
+--------------------------------------
+PERMISSION UPDATES:
+    -DIRS:  '755'
+    -FILES: '644'
+
+STEP-1 COMPLETE @ 02:39:16 - RUNTIME: 5.4717 sec.
+
+
+
+********************************************************************************
+* DUPLICATOR-LITE INSTALL-LOG
+* STEP-2 START @ 02:40:11
+* NOTICE: Do NOT post to public sites or forums!!
+********************************************************************************
+USER INPUTS
+VIEW MODE___________: "basic"
+DB ACTION___________: "empty"
+DB HOST_____________: "**OBSCURED**"
+DB NAME_____________: "**OBSCURED**"
+DB PASS_____________: "**OBSCURED**"
+DB PORT_____________: "**OBSCURED**"
+NON-BREAKING SPACES_: false
+MYSQL MODE__________: "DEFAULT"
+MYSQL MODE OPTS_____: ""
+CHARSET_____________: "utf8"
+COLLATE_____________: "utf8_general_ci"
+COLLATE FB__________: false
+VIEW CREATION_______: true
+STORED PROCEDURE____: true
+********************************************************************************
+
+--------------------------------------
+DATABASE-ENVIRONMENT
+--------------------------------------
+MYSQL VERSION:	This Server: 10.4.6 -- Build Server: 5.6.40
+FILE SIZE:	dup-database__6019265-13143035.sql (927.04KB)
+TIMEOUT:	5000
+MAXPACK:	16777216
+SQLMODE:	STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+NEW SQL FILE:	[/Users/mthomas/www/harwintonfair/dup-installer/dup-installer-data__6019265-13143035.sql]
+COLLATE FB:	Off
+--------------------------------------
+DATABASE RESULTS
+--------------------------------------
+DB VIEWS:	enabled
+DB PROCEDURES:	enabled
+ERRORS FOUND:	0
+DROPPED TABLES:	12
+RENAMED TABLES:	0
+QUERIES RAN:	124
+
+wpxm_commentmeta: (0)
+wpxm_comments: (0)
+wpxm_duplicator_packages: (0)
+wpxm_links: (0)
+wpxm_options: (192)
+wpxm_postmeta: (554)
+wpxm_posts: (331)
+wpxm_term_relationships: (45)
+wpxm_term_taxonomy: (11)
+wpxm_termmeta: (0)
+wpxm_terms: (11)
+wpxm_usermeta: (49)
+wpxm_users: (2)
+Removed '29' cache/transient rows
+
+INSERT DATA RUNTIME: 0.6052 sec.
+STEP-2 COMPLETE @ 02:40:11 - RUNTIME: 0.6128 sec.
+
+====================================
+SET SEARCH AND REPLACE LIST
+====================================
+
+
+********************************************************************************
+DUPLICATOR PRO INSTALL-LOG
+STEP-3 START @ 02:40:27
+NOTICE: Do NOT post to public sites or forums
+********************************************************************************
+CHARSET SERVER:	"utf8"
+CHARSET CLIENT:	"utf8"
+********************************************************************************
+OPTIONS:
+blogname______________: "Harwinton Fair"
+postguid______________: false
+fullsearch____________: false
+path_old______________: "/home/harwinto/public_html"
+path_new______________: "/Users/mthomas/www/harwintonfair"
+siteurl_______________: "http://harwintonfair.test"
+url_old_______________: "http://harwintonfair.com"
+url_new_______________: "http://harwintonfair.test"
+maxSerializeStrlen____: 4000000
+replaceMail___________: false
+dbhost________________: "localhost"
+dbuser________________: "root"
+dbname________________: "harwintonfair"
+dbcharset_____________: "utf8"
+dbcollate_____________: "utf8_general_ci"
+wp_username___________: ""
+wp_mail_______________: ""
+wp_nickname___________: ""
+wp_first_name_________: ""
+wp_last_name__________: ""
+ssl_admin_____________: false
+cache_wp______________: false
+cache_path____________: false
+exe_safe_mode_________: false
+config_mode___________: "NEW"
+********************************************************************************
+
+
+====================================
+RUN SEARCH AND REPLACE
+====================================
+
+EVALUATE TABLE: "wpxm_commentmeta"________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wpxm_comments"___________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wpxm_duplicator_packages"________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wpxm_links"______________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wpxm_options"____________________________________[ROWS:   192][PG:   1][SCAN:text columns]
+	SEARCH  1:"/home/harwinto/public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  2:"\/home\/harwinto\/public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  3:"%2Fhome%2Fharwinto%2Fpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  4:"\home\harwinto\public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  5:"\\home\\harwinto\\public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  6:"%5Chome%5Charwinto%5Cpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  7:"//harwintonfair.com" =============================> "//harwintonfair.test"
+	SEARCH  8:"\/\/harwintonfair.com" ===========================> "\/\/harwintonfair.test"
+	SEARCH  9:"%2F%2Fharwintonfair.com" =========================> "%2F%2Fharwintonfair.test"
+	SEARCH 10:"//www.harwintonfair.com" =========================> "//harwintonfair.test"
+	SEARCH 11:"\/\/www.harwintonfair.com" =======================> "\/\/harwintonfair.test"
+	SEARCH 12:"%2F%2Fwww.harwintonfair.com" =====================> "%2F%2Fharwintonfair.test"
+	SEARCH 13:"https://harwintonfair.test" ======================> "http://harwintonfair.test"
+	SEARCH 14:"https:\/\/harwintonfair.test" ====================> "http:\/\/harwintonfair.test"
+	SEARCH 15:"https%3A%2F%2Fharwintonfair.test" ================> "http%3A%2F%2Fharwintonfair.test"
+
+EVALUATE TABLE: "wpxm_postmeta"___________________________________[ROWS:   554][PG:   1][SCAN:text columns]
+	SEARCH  1:"/home/harwinto/public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  2:"\/home\/harwinto\/public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  3:"%2Fhome%2Fharwinto%2Fpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  4:"\home\harwinto\public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  5:"\\home\\harwinto\\public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  6:"%5Chome%5Charwinto%5Cpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  7:"//harwintonfair.com" =============================> "//harwintonfair.test"
+	SEARCH  8:"\/\/harwintonfair.com" ===========================> "\/\/harwintonfair.test"
+	SEARCH  9:"%2F%2Fharwintonfair.com" =========================> "%2F%2Fharwintonfair.test"
+	SEARCH 10:"//www.harwintonfair.com" =========================> "//harwintonfair.test"
+	SEARCH 11:"\/\/www.harwintonfair.com" =======================> "\/\/harwintonfair.test"
+	SEARCH 12:"%2F%2Fwww.harwintonfair.com" =====================> "%2F%2Fharwintonfair.test"
+	SEARCH 13:"https://harwintonfair.test" ======================> "http://harwintonfair.test"
+	SEARCH 14:"https:\/\/harwintonfair.test" ====================> "http:\/\/harwintonfair.test"
+	SEARCH 15:"https%3A%2F%2Fharwintonfair.test" ================> "http%3A%2F%2Fharwintonfair.test"
+
+EVALUATE TABLE: "wpxm_posts"______________________________________[ROWS:   331][PG:   1][SCAN:text columns]
+	SEARCH  1:"/home/harwinto/public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  2:"\/home\/harwinto\/public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  3:"%2Fhome%2Fharwinto%2Fpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  4:"\home\harwinto\public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  5:"\\home\\harwinto\\public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  6:"%5Chome%5Charwinto%5Cpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  7:"//harwintonfair.com" =============================> "//harwintonfair.test"
+	SEARCH  8:"\/\/harwintonfair.com" ===========================> "\/\/harwintonfair.test"
+	SEARCH  9:"%2F%2Fharwintonfair.com" =========================> "%2F%2Fharwintonfair.test"
+	SEARCH 10:"//www.harwintonfair.com" =========================> "//harwintonfair.test"
+	SEARCH 11:"\/\/www.harwintonfair.com" =======================> "\/\/harwintonfair.test"
+	SEARCH 12:"%2F%2Fwww.harwintonfair.com" =====================> "%2F%2Fharwintonfair.test"
+	SEARCH 13:"https://harwintonfair.test" ======================> "http://harwintonfair.test"
+	SEARCH 14:"https:\/\/harwintonfair.test" ====================> "http:\/\/harwintonfair.test"
+	SEARCH 15:"https%3A%2F%2Fharwintonfair.test" ================> "http%3A%2F%2Fharwintonfair.test"
+
+EVALUATE TABLE: "wpxm_term_relationships"_________________________[ROWS:    45][PG:   1][SCAN:text columns]
+	SEARCH  1:"/home/harwinto/public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  2:"\/home\/harwinto\/public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  3:"%2Fhome%2Fharwinto%2Fpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  4:"\home\harwinto\public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  5:"\\home\\harwinto\\public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  6:"%5Chome%5Charwinto%5Cpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  7:"//harwintonfair.com" =============================> "//harwintonfair.test"
+	SEARCH  8:"\/\/harwintonfair.com" ===========================> "\/\/harwintonfair.test"
+	SEARCH  9:"%2F%2Fharwintonfair.com" =========================> "%2F%2Fharwintonfair.test"
+	SEARCH 10:"//www.harwintonfair.com" =========================> "//harwintonfair.test"
+	SEARCH 11:"\/\/www.harwintonfair.com" =======================> "\/\/harwintonfair.test"
+	SEARCH 12:"%2F%2Fwww.harwintonfair.com" =====================> "%2F%2Fharwintonfair.test"
+	SEARCH 13:"https://harwintonfair.test" ======================> "http://harwintonfair.test"
+	SEARCH 14:"https:\/\/harwintonfair.test" ====================> "http:\/\/harwintonfair.test"
+	SEARCH 15:"https%3A%2F%2Fharwintonfair.test" ================> "http%3A%2F%2Fharwintonfair.test"
+
+EVALUATE TABLE: "wpxm_term_taxonomy"______________________________[ROWS:    11][PG:   1][SCAN:text columns]
+	SEARCH  1:"/home/harwinto/public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  2:"\/home\/harwinto\/public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  3:"%2Fhome%2Fharwinto%2Fpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  4:"\home\harwinto\public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  5:"\\home\\harwinto\\public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  6:"%5Chome%5Charwinto%5Cpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  7:"//harwintonfair.com" =============================> "//harwintonfair.test"
+	SEARCH  8:"\/\/harwintonfair.com" ===========================> "\/\/harwintonfair.test"
+	SEARCH  9:"%2F%2Fharwintonfair.com" =========================> "%2F%2Fharwintonfair.test"
+	SEARCH 10:"//www.harwintonfair.com" =========================> "//harwintonfair.test"
+	SEARCH 11:"\/\/www.harwintonfair.com" =======================> "\/\/harwintonfair.test"
+	SEARCH 12:"%2F%2Fwww.harwintonfair.com" =====================> "%2F%2Fharwintonfair.test"
+	SEARCH 13:"https://harwintonfair.test" ======================> "http://harwintonfair.test"
+	SEARCH 14:"https:\/\/harwintonfair.test" ====================> "http:\/\/harwintonfair.test"
+	SEARCH 15:"https%3A%2F%2Fharwintonfair.test" ================> "http%3A%2F%2Fharwintonfair.test"
+
+EVALUATE TABLE: "wpxm_termmeta"___________________________________[ROWS:     0][PG:   0][SCAN:no columns  ]
+
+EVALUATE TABLE: "wpxm_terms"______________________________________[ROWS:    11][PG:   1][SCAN:text columns]
+	SEARCH  1:"/home/harwinto/public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  2:"\/home\/harwinto\/public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  3:"%2Fhome%2Fharwinto%2Fpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  4:"\home\harwinto\public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  5:"\\home\\harwinto\\public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  6:"%5Chome%5Charwinto%5Cpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  7:"//harwintonfair.com" =============================> "//harwintonfair.test"
+	SEARCH  8:"\/\/harwintonfair.com" ===========================> "\/\/harwintonfair.test"
+	SEARCH  9:"%2F%2Fharwintonfair.com" =========================> "%2F%2Fharwintonfair.test"
+	SEARCH 10:"//www.harwintonfair.com" =========================> "//harwintonfair.test"
+	SEARCH 11:"\/\/www.harwintonfair.com" =======================> "\/\/harwintonfair.test"
+	SEARCH 12:"%2F%2Fwww.harwintonfair.com" =====================> "%2F%2Fharwintonfair.test"
+	SEARCH 13:"https://harwintonfair.test" ======================> "http://harwintonfair.test"
+	SEARCH 14:"https:\/\/harwintonfair.test" ====================> "http:\/\/harwintonfair.test"
+	SEARCH 15:"https%3A%2F%2Fharwintonfair.test" ================> "http%3A%2F%2Fharwintonfair.test"
+
+EVALUATE TABLE: "wpxm_usermeta"___________________________________[ROWS:    49][PG:   1][SCAN:text columns]
+	SEARCH  1:"/home/harwinto/public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  2:"\/home\/harwinto\/public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  3:"%2Fhome%2Fharwinto%2Fpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  4:"\home\harwinto\public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  5:"\\home\\harwinto\\public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  6:"%5Chome%5Charwinto%5Cpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  7:"//harwintonfair.com" =============================> "//harwintonfair.test"
+	SEARCH  8:"\/\/harwintonfair.com" ===========================> "\/\/harwintonfair.test"
+	SEARCH  9:"%2F%2Fharwintonfair.com" =========================> "%2F%2Fharwintonfair.test"
+	SEARCH 10:"//www.harwintonfair.com" =========================> "//harwintonfair.test"
+	SEARCH 11:"\/\/www.harwintonfair.com" =======================> "\/\/harwintonfair.test"
+	SEARCH 12:"%2F%2Fwww.harwintonfair.com" =====================> "%2F%2Fharwintonfair.test"
+	SEARCH 13:"https://harwintonfair.test" ======================> "http://harwintonfair.test"
+	SEARCH 14:"https:\/\/harwintonfair.test" ====================> "http:\/\/harwintonfair.test"
+	SEARCH 15:"https%3A%2F%2Fharwintonfair.test" ================> "http%3A%2F%2Fharwintonfair.test"
+
+EVALUATE TABLE: "wpxm_users"______________________________________[ROWS:     2][PG:   1][SCAN:text columns]
+	SEARCH  1:"/home/harwinto/public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  2:"\/home\/harwinto\/public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  3:"%2Fhome%2Fharwinto%2Fpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  4:"\home\harwinto\public_html" ======================> "/Users/mthomas/www/harwintonfair"
+	SEARCH  5:"\\home\\harwinto\\public_html" ===================> "\/Users\/mthomas\/www\/harwintonfair"
+	SEARCH  6:"%5Chome%5Charwinto%5Cpublic_html" ================> "%2FUsers%2Fmthomas%2Fwww%2Fharwintonfair"
+	SEARCH  7:"//harwintonfair.com" =============================> "//harwintonfair.test"
+	SEARCH  8:"\/\/harwintonfair.com" ===========================> "\/\/harwintonfair.test"
+	SEARCH  9:"%2F%2Fharwintonfair.com" =========================> "%2F%2Fharwintonfair.test"
+	SEARCH 10:"//www.harwintonfair.com" =========================> "//harwintonfair.test"
+	SEARCH 11:"\/\/www.harwintonfair.com" =======================> "\/\/harwintonfair.test"
+	SEARCH 12:"%2F%2Fwww.harwintonfair.com" =====================> "%2F%2Fharwintonfair.test"
+	SEARCH 13:"https://harwintonfair.test" ======================> "http://harwintonfair.test"
+	SEARCH 14:"https:\/\/harwintonfair.test" ====================> "http:\/\/harwintonfair.test"
+	SEARCH 15:"https%3A%2F%2Fharwintonfair.test" ================> "http%3A%2F%2Fharwintonfair.test"
+--------------------------------------
+SCANNED:	Tables:13 	|	 Rows:1195 	|	 Cells:11058 
+UPDATED:	Tables:2 	|	 Rows:288 	|	 Cells:329 
+ERRORS:		0 
+RUNTIME:	0.264800 sec
+
+====================================
+REMOVE LICENSE KEY
+====================================
+
+====================================
+CREATE NEW ADMIN USER
+====================================
+
+====================================
+CONFIGURATION FILE UPDATES
+====================================
+	UPDATE DB_NAME ""harwintonfair""
+	UPDATE DB_USER ""root""
+	UPDATE DB_PASSWORD "** OBSCURED **"
+	UPDATE DB_HOST ""localhost""
+	REMOVE WPCACHEHOME
+	
+*** UPDATED WP CONFIG FILE ***
+
+====================================
+HTACCESS UPDATE MODE: "NEW"
+====================================
+- PASS: Successfully created a new .htaccess file.
+- PASS: Existing Apache '.htaccess__6019265-13143035' was removed
+
+====================================
+GENERAL UPDATES & CLEANUP
+====================================
+
+====================================
+DEACTIVATE PLUGINS CHECK
+====================================
+Deactivated plugins list here: Array
+(
+    [0] => really-simple-ssl/rlrsssl-really-simple-ssl.php
+    [1] => simple-google-recaptcha/simple-google-recaptcha.php
+    [2] => js_composer/js_composer.php
+)
+
+
+====================================
+NOTICES TEST
+====================================
+No General Notices Found
+
+
+====================================
+CLEANUP TMP FILES
+====================================
+
+====================================
+FINAL REPORT NOTICES
+====================================
+
+STEP-3 COMPLETE @ 02:40:27 - RUNTIME: 0.3121 sec. 
+
+
+====================================
+FINAL REPORT NOTICES LIST
+====================================
+-----------------------
+[INFO] No general notices
+	SECTIONS: general
+
+-----------------------
+[INFO] No errors in database
+	SECTIONS: database
+
+-----------------------
+[INFO] No search and replace data errors
+	SECTIONS: search_replace
+
+-----------------------
+[INFO] No files extraction errors
+	SECTIONS: files
+
+====================================

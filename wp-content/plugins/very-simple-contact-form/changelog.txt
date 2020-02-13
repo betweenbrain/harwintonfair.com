@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+= Version 10.9 =
+* Display privacy consent info in submission only when feature is activated
+* Minor changes in code
+
 = Version 10.8 =
 * Removed files vscf-page-shortcode and vscf-widget-shortcode
 * Added file vscf-shortcodes instead
@@ -39,6 +43,7 @@ CHANGELOG
 * Minor changes in code
 
 = Version 10.0 =
+* Fix: updated register_setting()
 * Minor changes in code
 * Added, removed and changed escaping and sanitizing of many items
 
@@ -128,7 +133,7 @@ CHANGELOG
 * Added files vscf-validate and vscf-submission
 * Relocated validation and sending & saving from shortcode files to these 2 new files
 * New setting: captcha without using a PHP session
-* This is less secure. use this if default captcha is not working properly
+* This is less secure, use this if default captcha is not working properly
 * Added tabbed navigation on settingspage
 * Some textual changes (thanks Tom)
 
@@ -142,7 +147,8 @@ CHANGELOG
 * Added stripslashes() and htmlspecialchars_decode() filter for form and form submission
 * Now unexpected backslashes are removed when using single or double quote
 * And certain HTML entities are converted to normal characters
-* Changed required version to 4.7 because of new filter sanitize_textarea_field()
+* Changed wp_kses_post() into sanitize_textarea_field()
+* Because of change above plugin now requires at least WP 4.7
 
 = Version 8.6 =
 * Readme file: removed donate link

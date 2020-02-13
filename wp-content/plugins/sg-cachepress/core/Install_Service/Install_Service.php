@@ -15,6 +15,11 @@ use SiteGround_Optimizer\Install_Service\Install_5_2_5;
 use SiteGround_Optimizer\Install_Service\Install_5_3_0;
 use SiteGround_Optimizer\Install_Service\Install_5_3_1;
 use SiteGround_Optimizer\Install_Service\Install_5_3_2;
+use SiteGround_Optimizer\Install_Service\Install_5_3_4;
+use SiteGround_Optimizer\Install_Service\Install_5_3_6;
+use SiteGround_Optimizer\Install_Service\Install_5_3_10;
+use SiteGround_Optimizer\Install_Service\Install_5_4_0;
+use SiteGround_Optimizer\Install_Service\Install_5_4_3;
 use SiteGround_Optimizer\Supercacher\Supercacher;
 
 /**
@@ -67,6 +72,11 @@ class Install_Service {
 			new Install_5_3_0(),
 			new Install_5_3_1(),
 			new Install_5_3_2(),
+			new Install_5_3_4(),
+			new Install_5_3_6(),
+			new Install_5_3_10(),
+			new Install_5_4_0(),
+			new Install_5_4_3(),
 		);
 
 		$version = null;

@@ -11,7 +11,7 @@ use SiteGround_Optimizer\Memcache\Memcache;
 use SiteGround_Optimizer\Php_Checker\Php_Checker;
 use SiteGround_Optimizer\Front_End_Optimization\Front_End_Optimization;
 use SiteGround_Optimizer\Cli\Cli;
-use SiteGround_Optimizer\Images_Optimizer\Images_Optimizer;
+use SiteGround_Optimizer\Config\Config;
 
 /**
  * Helper functions and main initialization class.
@@ -62,11 +62,11 @@ class Helper {
 		// Init the main class responsible for front-end optionmization.
 		new Front_End_Optimization();
 
-		// Init the Image optimizer.
-		new Images_Optimizer();
-
 		// Init the CLI commands.
 		new Cli();
+
+		// Init the config class.
+		new Config();
 	}
 
 	/**

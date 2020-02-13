@@ -48,6 +48,7 @@ class Combinator {
 		'elementor-global', // Excluded in 5.2.5.
 		'tve_style_family_tve_flt', // Excluded in 5.3.0.
 		'siteorigin-widget-icon-font-fontawesome',
+		'woocommerce-smallscreen',
 	);
 
 	/**
@@ -155,9 +156,13 @@ class Combinator {
 				( true === $in_header && $styles->groups[ $handle ] > 0 ) || // Bail if the style is not in the header/footer.
 				in_array( $handle, $excluded_styles ) || // If the style is excluded from combination.
 				false === $wp_styles->registered[ $handle ]->src || // If the source is empty.
-				@strpos( Helper::get_home_url(), parse_url( $wp_styles->registered[ $handle ]->src, PHP_URL_HOST ) ) === false || // Skip all external sources.
+				(
+					@strpos( Helper::get_home_url(), parse_url( $wp_styles->registered[ $handle ]->src, PHP_URL_HOST ) ) === false && // Skip all external sources.
+					! strpos( $wp_styles->registered[ $handle ]->src, 'wp-includes' ) // Do not exclude wp-includes styles.
+				) ||
 				pathinfo( $wp_styles->registered[ $handle ]->src, PATHINFO_EXTENSION ) === 'php' || // If it's dynamically generated css.
-				is_int( strpos( $handle, 'elementor-post-' ) ) // Exclude all elementor styles.
+				is_int( strpos( $handle, 'elementor-post-' ) ) || // Exclude all elementor styles.
+				! empty( $wp_styles->registered[ $handle ]->extra['conditional'] ) // Do not combine conditional styles.
 			) {
 				continue;
 			}
@@ -167,7 +172,7 @@ class Combinator {
 
 			if ( ! empty( $item_inline_style ) ) {
 				// Check for inline styles.
-				$inline_styles .= implode( $item_inline_style, "\n" );
+				$inline_styles .= implode( "\n", $item_inline_style );
 			}
 
 			$content[ $wp_styles->registered[ $handle ]->src ] = $this->get_style_content( $wp_styles->registered[ $handle ]->src );
@@ -266,7 +271,7 @@ class Combinator {
 	 * @return string          The url to the new file.
 	 */
 	public function create_temp_style_and_get_url( $content, $handle ) {
-		$style_hash = md5( implode( $content ) );
+		$style_hash = md5( implode( '', $content ) );
 		$new_file   = $this->assets_dir . 'siteground-optimizer-combined-styles-' . $style_hash . '.css';
 		$url        = str_replace( ABSPATH, Helper::get_home_url(), $new_file );
 

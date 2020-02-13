@@ -42,6 +42,7 @@ class Cli_Optimizer {
 	 *  - images
 	 *  - lazyload
 	 *  - gzip
+	 *  - google-fonts
 	 *  - browsercache
 	 * ---
 	 * <action>
@@ -54,7 +55,6 @@ class Cli_Optimizer {
 	public function __invoke( $args, $assoc_args ) {
 		$this->option_service   = new Options();
 		$this->htaccess_service = new Htaccess();
-		$this->image_optimizer  = new Images_Optimizer();
 
 		$blog_id = ! empty( $assoc_args['blog_id'] ) ? $assoc_args['blog_id'] : false;
 
@@ -69,6 +69,7 @@ class Cli_Optimizer {
 			case 'emojis':
 			case 'js-async':
 			case 'combine-css':
+			case 'google-fonts':
 			case 'images':
 				return $this->optimize( $args[1], $args[0], $blog_id );
 			case 'lazyload':
@@ -223,6 +224,7 @@ class Cli_Optimizer {
 	}
 
 	public function optimize_images( $blog_id = false ) {
+		$this->image_optimizer  = new Images_Optimizer();
 
 		$this->validate_multisite( 'images', $blog_id );
 

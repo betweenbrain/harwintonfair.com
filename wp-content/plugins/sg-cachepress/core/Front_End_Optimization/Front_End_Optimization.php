@@ -3,10 +3,11 @@ namespace SiteGround_Optimizer\Front_End_Optimization;
 
 use SiteGround_Optimizer\Options\Options;
 use SiteGround_Optimizer\Emojis_Removal\Emojis_Removal;
-use SiteGround_Optimizer\Lazy_Load_Images\Lazy_Load_Images;
+use SiteGround_Optimizer\Lazy_Load\Lazy_Load;
 use SiteGround_Optimizer\Images_Optimizer\Images_Optimizer;
 use SiteGround_Optimizer\Minifier\Minifier;
 use SiteGround_Optimizer\Combinator\Combinator;
+use SiteGround_Optimizer\Combinator\Fonts_Combinator;
 use SiteGround_Optimizer\Helper\Helper;
 /**
  * SG Front_End_Optimization main plugin class
@@ -30,9 +31,10 @@ class Front_End_Optimization {
 	 * @var array Array of script handles that shouldn't be loaded async.
 	 */
 	private $blacklisted_async_scripts = array(
-		'jquery',
-		'jquery-core',
 		'moxiejs',
+		'wc-square',
+		'wc-braintree',
+		'sv-wc-payment-gateway-payment-form',
 	);
 
 	/**
@@ -69,10 +71,8 @@ class Front_End_Optimization {
 			get_option( 'siteground_optimizer_async_javascript_exclude', array() )
 		);
 
-		// Enabled lazy load images.
-		if ( Options::is_enabled( 'siteground_optimizer_optimize_images' ) ) {
-			new Images_Optimizer();
-		}
+		// Enabled images optimizer.
+		new Images_Optimizer();
 
 		if (
 			is_admin() ||
@@ -93,15 +93,9 @@ class Front_End_Optimization {
 			new Emojis_Removal();
 		}
 
-		// Enabled lazy load images.
+		// Load the lazy load functionality.
 		if ( Options::is_enabled( 'siteground_optimizer_lazyload_images' ) ) {
-
-			if (
-				! self::is_mobile() ||
-				( self::is_mobile() && Options::is_enabled( 'siteground_optimizer_lazyload_mobile' ) )
-			) {
-				new Lazy_Load_Images();
-			}
+			new Lazy_Load();
 		}
 
 		if ( Options::is_enabled( 'siteground_optimizer_combine_css' ) ) {
@@ -114,6 +108,10 @@ class Front_End_Optimization {
 
 			// Add async attr to all scripts.
 			add_filter( 'script_loader_tag', array( $this, 'add_async_attribute' ), 10, 3 );
+		}
+
+		if ( Options::is_enabled( 'siteground_optimizer_combine_google_fonts' ) ) {
+			new Fonts_Combinator();
 		}
 
 		new Minifier();
@@ -220,7 +218,6 @@ class Front_End_Optimization {
 		return $this->assets_dir;
 	}
 
-
 	/**
 	 * Prepare scripts to be included async.
 	 *
@@ -230,7 +227,7 @@ class Front_End_Optimization {
 		global $wp_scripts;
 
 		// Bail if the scripts object is empty.
-		if ( ! is_object( $wp_scripts ) ) {
+		if ( ! is_object( $wp_scripts ) || is_user_logged_in() ) {
 			return;
 		}
 
@@ -243,7 +240,6 @@ class Front_End_Optimization {
 		foreach ( $scripts->to_do as $handle ) {
 			// We don't want to load footer scripts asynchronous.
 			if (
-				$scripts->groups[ $handle ] > 0 ||
 				in_array( $handle, $excluded_scripts ) ||
 				empty( $wp_scripts->registered[ $handle ]->src )
 			) {
@@ -273,11 +269,13 @@ class Front_End_Optimization {
 					'<script ',
 					'-siteground-async',
 					$src,
+					'?#038;',
 				),
 				array(
-					'<script async ',
+					'<script defer ',
 					'',
 					$new_src,
+					'?',
 				),
 				$tag
 			);
@@ -305,7 +303,7 @@ class Front_End_Optimization {
 
 		if (
 			! empty( $exclude_list ) &&
-			preg_match( '~' . implode( $exclude_list, '|' ) . '~', $src )
+			preg_match( '~' . implode( '|', $exclude_list ) . '~', $src )
 		) {
 			return $src;
 		}
@@ -383,8 +381,6 @@ class Front_End_Optimization {
 	 */
 	private function get_assets_data( $assets ) {
 		$excludes = array(
-			'jquery',
-			'jquery-core',
 			'moxiejs',
 			'elementor-frontend',
 		);

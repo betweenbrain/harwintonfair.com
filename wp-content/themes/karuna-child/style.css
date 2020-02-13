@@ -1,0 +1,53 @@
+/*
+ Theme Name:   Karuna Child
+ Description:  Karuna Child Theme
+ Author:       Matt Thomas
+ Author URI:   http://betweenbrain.com
+ Template:     karuna
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Text Domain:  karunachild
+*/
+
+.header-widget-area {
+  background-color: #cf4647;
+}
+.site-footer,
+.top-bar {
+  background-color: #524656;
+}
+
+.footer-widgets-wrapper {
+  background-color: transparent;
+}
+
+.site-info {
+  left: -101vw;
+  position: absolute;
+}
+
+#menu-social-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  float: right;
+  width: 50%;
+}
+
+#menu-social-menu li {
+  display: inline-block;
+  padding-left: 12px;
+}
+
+#menu-social-menu li span {
+  left: -101vw;
+  position: absolute;
+}
+
+#menu-social-menu li svg {
+  fill: white;
+  width: 24px;
+  height: 24px;
+}

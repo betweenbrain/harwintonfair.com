@@ -292,7 +292,6 @@ class Minifier {
 		return $content;
 	}
 
-
 	/**
 	 * Start buffer.
 	 *
