@@ -24,6 +24,7 @@ add_action(
 					'name'         => __( 'Activities', 'hasEvents' ),
 				),
 				'public'            => true,
+				'rewrite'           => array( 'slug' => 'program' ),
 				'show_in_nav_menus' => true,
 				'supports'          => array(
 					'editor',
