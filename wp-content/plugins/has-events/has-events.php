@@ -20,7 +20,7 @@ add_action(
 					'add_new_item' => __( 'New Activity', 'hasEvents' ),
 					'all_items'    => __( 'Activities', 'hasEvents' ),
 					'edit_item'    => __( 'Edit Activity', 'hasEvents' ),
-					'name'         => __( 'Events', 'hasEvents' ),
+					'name'         => __( 'Events', 'hasEvents' ), // Menu Label
 				),
 				'public'            => true,
 				'show_in_nav_menus' => true,
