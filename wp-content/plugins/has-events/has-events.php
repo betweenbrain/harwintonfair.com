@@ -185,6 +185,7 @@ add_action(
 	0
 );
 
+/*
 add_action( 'event_add_form_fields', 'add_wysiwyg_field', 10, 1 );
 add_action( 'event_edit_form_fields', 'add_wysiwyg_field', 10, 1 );
 
@@ -206,10 +207,12 @@ function add_wysiwyg_field( $term = null ) {
 	</tr>
 	<?php
 }
+*/
 
 /**
  * Save the custom long description field.
  */
+/*
 add_action( 'created_event', 'save_long_description', 10, 1 );
 add_action( 'edited_event', 'save_long_description', 10, 1 );
 
@@ -223,10 +226,12 @@ function save_long_description( $term_id ) {
 		delete_term_meta( $term_id, 'long_description', $old );
 	}
 }
+*/
 
 /**
  * Save each occurrence.
  */
+/*
 add_action( 'created_event', 'save_occurrences', 10, 1 );
 add_action( 'edited_event', 'save_occurrences', 10, 1 );
 
@@ -245,6 +250,7 @@ function save_occurrences( $term_id ) {
 		}
 	}
 }
+*/
 
 /**
  * Adds datetime field to event taxonomy.
