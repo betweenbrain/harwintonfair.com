@@ -75,12 +75,7 @@ if ( $query->have_posts() ) :
 			margin: 0 auto;
 			width: 600px		}
 	</style>
-	<main class="wrapper
-	<?php
-	if ( is_active_sidebar( 'sidebar' ) ) {
-		echo ' two-column';}
-	?>
-	" role="main">
+	<main class="wrapper<?php echo is_active_sidebar( 'sidebar' ) ? ' two-column' : null; ?>" role="main">
 	<div>
 		<section class="event-day">
 		<?php
