@@ -69,14 +69,8 @@ if ( $query->have_posts() ) :
 		}
 	}
 	?>
-	<style>
-		#map {
-			height: 600px;
-			margin: 0 auto;
-			width: 600px		}
-	</style>
 	<main class="wrapper<?php echo is_active_sidebar( 'sidebar' ) ? ' two-column' : null; ?>" role="main">
-	<div>
+	<div class="event-list">
 		<section class="event-day">
 		<?php
 		foreach ( $markers as $key => $marker ) :
