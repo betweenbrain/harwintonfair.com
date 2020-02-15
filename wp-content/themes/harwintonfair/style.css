@@ -104,10 +104,28 @@ aside em {
   margin-left: 1rem;
 }
 
+.event-day ol {
+  margin-left: 0;
+  padding-left: 0;
+}
+
 .two-column {
   display: grid;
   grid-template-columns: 1fr 13rem;
   grid-column-gap: 2.5rem;
+}
+
+.event-list,
+.three-column {
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  grid-column-gap: 2.5rem;
+}
+
+#map {
+  height: 1040px;
+  margin: 0 auto;
+  width: 1040px;
 }
 
 .sticky-header .wrapper {
@@ -219,11 +237,6 @@ aside em {
 
   .entry-content {
     list-style: circle;
-  }
-
-  .event-day ol {
-    margin-left: 0;
-    padding-left: 1em;
   }
 
   main {
