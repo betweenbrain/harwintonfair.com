@@ -139,9 +139,9 @@ if ( $query->have_posts() ) :
 
 					marker.addListener('click', function() {
 						infowindow.open(map, marker);
-					  });
+					});
 
-					  markers.push(marker);
+					markers.push(marker);
 				})
 			}
 		}
