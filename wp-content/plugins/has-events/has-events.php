@@ -58,6 +58,7 @@ add_action(
 					'name'         => __( 'Vendors', 'hasEvents' ),
 				),
 				'public'            => true,
+				'rewrite'           => array( 'slug' => 'vendor-map' ),
 				'show_in_menu'      => 'edit.php?post_type=activity',
 				'show_in_nav_menus' => true,
 				'supports'          => array(
