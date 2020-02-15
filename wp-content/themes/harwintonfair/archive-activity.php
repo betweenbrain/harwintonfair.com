@@ -112,6 +112,7 @@ if ( $query->have_posts() ) :
 		const markerData = <?php echo json_encode( $markers ); ?>;
 
 		function initMap() {
+			const infowindow = new google.maps.InfoWindow();
 			const map = new google.maps.Map(document.getElementById('map'), {
 				center: { lat: 41.763031, lng: -73.044465 },
 				zoom: 17
@@ -125,9 +126,6 @@ if ( $query->have_posts() ) :
 					<p>${elem.occurrence}</p>`;
 					
 					const cords = elem['latLng'].replace('(', '').replace(')', '').split(',');
-					const infowindow = new google.maps.InfoWindow({
-						content: contentString
-					  });
 					const position = new google.maps.LatLng(cords[0], cords[1]);
 					
 					const marker = new google.maps.Marker({
@@ -138,7 +136,8 @@ if ( $query->have_posts() ) :
 					});
 
 					marker.addListener('click', function() {
-						infowindow.open(map, marker);
+						infowindow.setContent(contentString);
+						infowindow.open(map, this);
 					});
 
 					markers.push(marker);
