@@ -7,59 +7,127 @@ get_header();
 
 $today   = null;
 $key     = get_option( 'google_maps_api_key' );
-$markers = array();
+$vendors = array();
 
 /**
  * Get future activities.
  */
-$query = new WP_Query(
-	array(
-		'post_type'      => 'vendor',
-		'posts_per_page' => '50',
-		'paged'          => '1',
-		'order'          => 'ASC',
-	)
+$args = array(
+	'post_type'      => 'vendor',
+	'posts_per_page' => '50',
+	'paged'          => '1',
+	'order'          => 'ASC',
 );
 
+$vendor_category = get_query_var( 'vendor_category' );
+$vendor_type     = get_query_var( 'vendor_type' );
+
+if ( $vendor_category || $vendor_type ) {
+	$args['tax_query'] = [];
+
+	if ( $vendor_category ) {
+		$args['tax_query'][] = array(
+			'taxonomy' => 'vendor_category',
+			'field'    => 'slug',
+			'terms'    => $vendor_category,
+		);
+	}
+
+	if ( $vendor_type ) {
+		$args['tax_query'][] = array(
+			'taxonomy' => 'vendor_type',
+			'field'    => 'slug',
+			'terms'    => $vendor_type,
+		);
+	}
+}
+
+if ( $vendor_category && $vendor_type ) {
+	$args['tax_query']['relation'] = 'AND';
+}
+
+$query = new WP_Query( $args );
+
 if ( $query->have_posts() ) :
+
+	// Get vendor taxonomies to act as filters.
+	$types      = get_terms(
+		array(
+			'taxonomy'   => 'vendor_type',
+			'hide_empty' => true,
+		)
+	);
+	$categories = get_terms(
+		array(
+			'taxonomy'   => 'vendor_category',
+			'hide_empty' => true,
+		)
+	);
+
 	foreach ( $query->posts as $post ) {
-		$latLng    = $meta     = get_post_meta( $post->ID, 'latLng', true );
-		$markers[] = array(
+		$latLng    = get_post_meta( $post->ID, 'latLng', true );
+		$vendors[] = array(
 			'latLng' => $latLng,
 			'name'   => $post->post_title,
 		);
-	}
-	?>
+	}?>
 	<main class="wrapper<?php echo is_active_sidebar( 'sidebar' ) ? ' two-column' : null; ?>" role="main">
-	<div class="event-list">
-		<section class="event-day">
-		<ol>
-		<?php
-		foreach ( $markers as $key => $marker ) :
-			?>
-				<li class="entry-content">
-					<a href="#map" onClick="google.maps.event.trigger(markers[<?php echo $key; ?>], 'click')">
-					<?php echo $marker['name']; ?>
-					</a>
-				</li>
+		<div class="three-column">	
+			<div class="vendors">
+				<h2>Vendors</h2>
+				<ul>
+				<?php foreach ( $vendors as $key => $marker ) : ?>
+					<li class="entry-content">
+						<a onClick="google.maps.event.trigger(markers[<?php echo $key; ?>], 'click')">
+						<?php echo $marker['name']; ?>
+						</a>
+					</li>
 				<?php endforeach; ?>
-			</ol>
-		</section>
-	</div>
-	<div id="map"></div>
-	<div>
-		<section>
-		</section>
-	</div>
-	<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
-	<aside>
-		<?php dynamic_sidebar( 'sidebar' ); ?>
-	</aside>
-	<?php endif; ?>
+				</ul>
+			</div>
+			<div class="tags">
+				<h2>Filters</h2>
+				<ul>
+					<li class="entry-content">
+						<a href="
+						<?php
+						echo add_query_arg(
+							array(
+								'vendor_type'     => null,
+								'vendor_category' => null,
+							)
+						);
+						?>
+						">Reset Filters</a>
+					</li>
+				<?php foreach ( $types as $key => $type ) : ?>
+					<li class="entry-content">
+						<?php // echo '<pre>' . print_r($type, true) . '</pre>'; ?>
+						<a href="<?php echo add_query_arg( 'vendor_type', $type->slug ); ?>">
+						<?php echo $type->name; ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+				<?php foreach ( $categories as $key => $category ) : ?>
+					<li class="entry-content">
+						<a href="<?php echo add_query_arg( 'vendor_category', $category->slug ); ?>">
+						<?php echo $category->name; ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+				</ul>
+			</div>
+			<div id="map"></div>
+		</div>
+		<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
+		<aside>
+			<?php dynamic_sidebar( 'sidebar' ); ?>
+		</aside>
+		<?php endif; ?>
 	</main>
 	<script>
 		const markers = [];
-		const markerData = <?php echo json_encode( $markers ); ?>;
+		const markerData = <?php echo json_encode( $vendors ); ?>;
 
 		function initMap() {
 			const infowindow = new google.maps.InfoWindow();

@@ -70,10 +70,46 @@ add_action(
 				),
 				'taxonomies'        => array(
 					'events',
+					'vendor_type',
 				),
 			)
 		);
 	}
+);
+
+/**
+ * Register vendor type taxonomy.
+ */
+add_action(
+	'init',
+	function () {
+		register_taxonomy(
+			'vendor_category', 'vendor', array(
+				'label'                 => __( 'Vendor Categories', 'hasEvents' ),
+				'update_count_callback' => '_update_post_term_count',
+				'query_var'             => 'vendor_category',
+			)
+		);
+	},
+	0
+);
+
+/**
+ * Register vendor type taxonomy.
+ */
+add_action(
+	'init',
+	function () {
+		register_taxonomy(
+			'vendor_type', 'vendor', array(
+				'label'                 => __( 'Vendor Types', 'hasEvents' ),
+				'show_admin_column'     => true,
+				'update_count_callback' => '_update_post_term_count',
+				'query_var'             => 'vendor_type',
+			)
+		);
+	},
+	0
 );
 
 /**
