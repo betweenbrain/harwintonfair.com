@@ -5,6 +5,7 @@
 
 get_header();
 
+$day     = null;
 $today   = date( 'Y-m-d' );
 $key     = get_option( 'google_maps_api_key' );
 $markers = array();
@@ -35,8 +36,8 @@ $query = new WP_Query(
 if ( $query->have_posts() ) :
 
 	/**
- * Get each activity location.
- */
+	 * Get each activity location.
+	 */
 	foreach ( $query->posts as $post ) {
 		$location = wp_get_post_terms( $post->ID, array( 'location' ) )[0];
 		$meta     = get_post_meta( $post->ID );
@@ -84,6 +85,27 @@ if ( $query->have_posts() ) :
 		echo ' two-column';}
 	?>
 	" role="main">
+	<div>
+		<section class="event-day">
+		<?php foreach ( $query->posts as $post ) :
+			$meta = get_post_meta( $post->ID );
+			$date = date( 'l, F jS', strtotime( $meta['0_begin'][0] ) );
+			if ( $day != $date ) :
+				?>
+				<?php if ( ! is_null( $day ) ) : ?>
+					</ol>
+				</section>
+				<section class="event-day">
+			<?php endif; ?>
+				<?php $day = $date; ?>
+				<h2><?php echo $date; ?></h2>
+				<ol>
+				<?php endif; ?>
+			<?php get_template_part( 'parts/activity' ); ?>
+				<?php endforeach; ?>
+			</ol>
+		</section>
+	</div>
 	<div id="map"></div>
 	<div>
 		<section>
