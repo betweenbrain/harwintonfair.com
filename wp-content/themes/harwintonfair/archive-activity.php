@@ -5,8 +5,7 @@
 
 get_header();
 
-$day     = null;
-$today   = date( 'Y-m-d' );
+$today   = null;
 $key     = get_option( 'google_maps_api_key' );
 $markers = array();
 
@@ -25,7 +24,7 @@ $query = new WP_Query(
 				// meta key like comparison
 				'compare_key' => 'LIKE',
 				'key'         => 'begin',
-				'value'       => $today,
+				'value'       => date( 'Y-m-d' ),
 				'compare'     => '>',
 				'type'        => 'DATETIME',
 			),
@@ -34,10 +33,6 @@ $query = new WP_Query(
 );
 
 if ( $query->have_posts() ) :
-
-	/**
-	 * Get each activity location.
-	 */
 	foreach ( $query->posts as $post ) {
 		$location = wp_get_post_terms( $post->ID, array( 'location' ) )[0];
 		$meta     = get_post_meta( $post->ID );
@@ -47,30 +42,31 @@ if ( $query->have_posts() ) :
 		foreach ( $meta as $key => $value ) {
 			// Check if this field is part of a datetime set.
 			if ( strpos( $key, 'begin' ) || strpos( $key, 'end' ) ) {
-				$parts = explode( '_', $key );
-				// Initialize empty string for this occurrence.
-				if ( ! array_key_exists( $parts[0], $occurrence ) ) {
-					$occurrence[ $parts[0] ] = '';
-				}
+				$parts      = explode( '_', $key );
+				$occurrence = '';
 
 				if ( strpos( $key, 'begin' ) ) {
-					$date                     = new DateTime( $value[0] );
-					$occurrence[ $parts[0] ] .= $date->format( 'M d, Y g:ia' );
+					$date        = new DateTime( $value[0] );
+					$day         = $date->format( 'l, F jS' );
+					$occurrence .= $date->format( 'M d, Y g:ia' );
+					$time        = $date->format( 'g:ia' );
 				}
 
 				if ( strpos( $key, 'end' ) ) {
-					$date                     = new DateTime( $value[0] );
-					$occurrence[ $parts[0] ] .= ' - ' . $date->format( 'g:ia' );
+					$date        = new DateTime( $value[0] );
+					$occurrence .= ' - ' . $date->format( 'g:ia' );
 				}
+
+				$markers[] = array(
+					'date'       => $day,
+					'occurrence' => $occurrence,
+					'latLng'     => $latLng,
+					'location'   => $location->name,
+					'name'       => $post->post_title,
+					'time'       => $time,
+				);
 			}
 		}
-
-		$markers[] = array(
-			'occurrence' => $occurrence,
-			'latLng'     => $latLng,
-			'location'   => $location->name,
-			'name'       => $post->post_title,
-		);
 	}
 	?>
 	<style>
@@ -87,21 +83,26 @@ if ( $query->have_posts() ) :
 	" role="main">
 	<div>
 		<section class="event-day">
-		<?php foreach ( $query->posts as $post ) :
-			$meta = get_post_meta( $post->ID );
-			$date = date( 'l, F jS', strtotime( $meta['0_begin'][0] ) );
-			if ( $day != $date ) :
+		<?php
+		foreach ( $markers as $key => $marker ) :
+			if ( $today != $marker['date'] ) :
 				?>
-				<?php if ( ! is_null( $day ) ) : ?>
+				<?php if ( ! is_null( $today ) ) : ?>
 					</ol>
 				</section>
 				<section class="event-day">
 			<?php endif; ?>
-				<?php $day = $date; ?>
-				<h2><?php echo $date; ?></h2>
+				<?php $today = $marker['date']; ?>
+				<h2><?php echo $marker['date']; ?></h2>
 				<ol>
 				<?php endif; ?>
-			<?php get_template_part( 'parts/activity' ); ?>
+				<li class="entry-content">
+					<?php echo $marker['time']; ?>
+					<?php echo $marker['name']; ?>
+					at the <a href="#map" onClick="google.maps.event.trigger(markers[<?php echo $key; ?>], 'click')">
+					<?php echo $marker['location']; ?>
+					</a>
+				</li>
 				<?php endforeach; ?>
 			</ol>
 		</section>
@@ -118,7 +119,8 @@ if ( $query->have_posts() ) :
 	<?php endif; ?>
 	</main>
 	<script>
-		const markers = <?php echo json_encode( $markers ); ?>;
+		const markers = [];
+		const markerData = <?php echo json_encode( $markers ); ?>;
 
 		function initMap() {
 			const map = new google.maps.Map(document.getElementById('map'), {
@@ -128,13 +130,10 @@ if ( $query->have_posts() ) :
 
 			/* Render saved markers */ 
 			if(markers){
-				markers.forEach(elem => {
-					let contentString = `<h1>${elem['name']}</h1>
-					<p>At the ${elem['location']}</p>`;
-
-					elem.occurrence.forEach(span => {
-						contentString += `<p>${span}</p>`;
-					})
+				markerData.forEach(elem => {
+					const contentString = `<h1>${elem['name']}</h1>
+					<p>At the ${elem['location']}</p>
+					<p>${elem.occurrence}</p>`;
 					
 					const cords = elem['latLng'].replace('(', '').replace(')', '').split(',');
 					const infowindow = new google.maps.InfoWindow({
@@ -152,6 +151,8 @@ if ( $query->have_posts() ) :
 					marker.addListener('click', function() {
 						infowindow.open(map, marker);
 					  });
+
+					  markers.push(marker);
 				})
 			}
 		}
