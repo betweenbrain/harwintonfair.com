@@ -70,42 +70,40 @@ if ( $query->have_posts() ) :
 	}
 	?>
 	<main class="wrapper<?php echo is_active_sidebar( 'sidebar' ) ? ' two-column' : null; ?>" role="main">
-	<div class="event-list">
-		<section class="event-day">
-		<?php
-		foreach ( $markers as $key => $marker ) :
-			if ( $today != $marker['date'] ) :
-				?>
-				<?php if ( ! is_null( $today ) ) : ?>
+		<div>
+			<div class="event-list">
+				<section class="event-day">
+				<?php
+				foreach ( $markers as $key => $marker ) :
+					if ( $today != $marker['date'] ) :
+						?>
+						<?php if ( ! is_null( $today ) ) : ?>
+							</ol>
+						</section>
+						<section class="event-day">
+					<?php endif; ?>
+						<?php $today = $marker['date']; ?>
+						<h2><?php echo $marker['date']; ?></h2>
+						<ol>
+						<?php endif; ?>
+						<li class="entry-content">
+							<?php echo $marker['time']; ?>
+							<?php echo $marker['name']; ?>
+							at the <a href="#map" onClick="google.maps.event.trigger(markers[<?php echo $key; ?>], 'click')">
+							<?php echo $marker['location']; ?>
+							</a>
+						</li>
+						<?php endforeach; ?>
 					</ol>
 				</section>
-				<section class="event-day">
-			<?php endif; ?>
-				<?php $today = $marker['date']; ?>
-				<h2><?php echo $marker['date']; ?></h2>
-				<ol>
-				<?php endif; ?>
-				<li class="entry-content">
-					<?php echo $marker['time']; ?>
-					<?php echo $marker['name']; ?>
-					at the <a href="#map" onClick="google.maps.event.trigger(markers[<?php echo $key; ?>], 'click')">
-					<?php echo $marker['location']; ?>
-					</a>
-				</li>
-				<?php endforeach; ?>
-			</ol>
-		</section>
-	</div>
-	<div id="map"></div>
-	<div>
-		<section>
-		</section>
-	</div>
-	<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
-	<aside>
-		<?php dynamic_sidebar( 'sidebar' ); ?>
-	</aside>
-	<?php endif; ?>
+			</div>
+			<div id="map"></div>
+		</div>
+		<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
+		<aside>
+			<?php dynamic_sidebar( 'sidebar' ); ?>
+		</aside>
+		<?php endif; ?>
 	</main>
 	<script>
 		const markers = [];
