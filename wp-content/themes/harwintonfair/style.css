@@ -123,9 +123,9 @@ aside em {
 }
 
 #map {
-  height: 1040px;
+  height: 640px;
   margin: 0 auto;
-  width: 1040px;
+  width: 640px;
 }
 
 .sticky-header .wrapper {
