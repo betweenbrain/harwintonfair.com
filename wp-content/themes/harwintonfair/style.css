@@ -109,13 +109,18 @@ aside em {
   padding-left: 0;
 }
 
+.event-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2.5rem;
+}
+
 .two-column {
   display: grid;
   grid-template-columns: 1fr 13rem;
   grid-column-gap: 2.5rem;
 }
 
-.event-list,
 .three-column {
   display: grid;
   grid-template-columns: 3fr 3fr 3fr;
