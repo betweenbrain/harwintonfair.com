@@ -70,8 +70,8 @@ if ( $query->have_posts() ) :
 	}
 	?>
 	<main class="wrapper<?php echo is_active_sidebar( 'sidebar' ) ? ' two-column' : null; ?>" role="main">
-		<div>
-			<div class="event-list">
+		<div class="event-list">
+			<div>
 				<section class="event-day">
 				<?php
 				foreach ( $markers as $key => $marker ) :
