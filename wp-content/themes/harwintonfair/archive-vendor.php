@@ -12,44 +12,16 @@ $vendors = array();
 /**
  * Get future activities.
  */
-$args = array(
+$args  = array(
 	'post_type'      => 'vendor',
-	'posts_per_page' => '50',
+	'posts_per_page' => '100',
 	'paged'          => '1',
 	'order'          => 'ASC',
 );
-
-$vendor_category = get_query_var( 'vendor_category' );
-$vendor_type     = get_query_var( 'vendor_type' );
-
-if ( $vendor_category || $vendor_type ) {
-	$args['tax_query'] = [];
-
-	if ( $vendor_category ) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'vendor_category',
-			'field'    => 'slug',
-			'terms'    => $vendor_category,
-		);
-	}
-
-	if ( $vendor_type ) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'vendor_type',
-			'field'    => 'slug',
-			'terms'    => $vendor_type,
-		);
-	}
-}
-
-if ( $vendor_category && $vendor_type ) {
-	$args['tax_query']['relation'] = 'AND';
-}
-
 $query = new WP_Query( $args );
 
 if ( $query->have_posts() ) :
-	// Get vendor taxonomies to act as filters.
+	// Get vendor taxonomies for filtering.
 	$types      = get_terms(
 		array(
 			'taxonomy'   => 'vendor_type',
@@ -97,7 +69,7 @@ if ( $query->have_posts() ) :
 				</select>
 				<ul>
 				<?php foreach ( $vendors as $key => $marker ) : ?>
-					<li class="entry-content">
+					<li class="entry-content vendor" data-tags="<?php echo implode( ' ', $marker['tags'] ); ?>">
 						<a onClick="google.maps.event.trigger(markers[<?php echo $key; ?>], 'click')">
 						<?php echo $marker['name']; ?>
 						</a>
@@ -117,10 +89,22 @@ if ( $query->have_posts() ) :
 		const markers = [];
 		const markerData = <?php echo json_encode( $vendors ); ?>;
 
+		filterList = function(tag) {
+			const elements = document.getElementsByClassName('vendor');
+			for (i = 0; i < elements.length; i++) {
+				if(elements[i].dataset.tags.indexOf(tag) < 0){
+					elements[i].classList.add('hidden');
+				}
+
+				if(elements[i].dataset.tags.indexOf(tag) >= 0 && elements[i].classList.contains('hidden')){
+					elements[i].classList.remove('hidden');
+				}
+			}
+		}
+
 		filterMarkers = function(val) {
+			filterList(val);
 			for (i = 0; i < markerData.length; i++) {
-				console.log(val);
-				console.log(markerData[i]);
 				if(markerData[i].tags.indexOf(val) >= 0 || !val){
 					markers[i].setVisible(true);
 				} else {          
@@ -140,7 +124,7 @@ if ( $query->have_posts() ) :
 			if(markers){
 				markerData.forEach(elem => {
 					const contentString = `<h1>${elem['name']}</h1>
-					<p>Maybe we can add tags that describe the vendor?</p>`;
+					<p>${elem['tags']}</p>`;
 					
 					const cords = elem['latLng'].replace('(', '').replace(')', '').split(',');
 					const position = new google.maps.LatLng(cords[0], cords[1]);
@@ -150,6 +134,17 @@ if ( $query->have_posts() ) :
 						map,
 						position,
 						title: elem['name']
+					});
+
+					// Close infowindow only if its corresponding marker gets hidden.
+					marker.addListener('visible_changed', function() {
+						const visible = marker.getVisible();
+						const markerPos = marker.getPosition().toString();
+						const infoPos = infowindow.getPosition().toString();
+
+						if(infoPos === markerPos && !visible) {
+							infowindow.close();
+						}
 					});
 
 					marker.addListener('click', function() {
