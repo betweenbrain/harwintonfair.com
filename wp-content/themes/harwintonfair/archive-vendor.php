@@ -49,7 +49,6 @@ if ( $vendor_category && $vendor_type ) {
 $query = new WP_Query( $args );
 
 if ( $query->have_posts() ) :
-
 	// Get vendor taxonomies to act as filters.
 	$types      = get_terms(
 		array(
@@ -63,21 +62,39 @@ if ( $query->have_posts() ) :
 			'hide_empty' => true,
 		)
 	);
+	$filters    = array_merge( $types, $categories );
 
 	foreach ( $query->posts as $post ) {
 		$latLng         = get_post_meta( $post->ID, 'latLng', true );
 		$postCategories = get_the_terms( $post->ID, 'vendor_category' );
 		$postTypes      = get_the_terms( $post->ID, 'vendor_type' );
-		$vendors[]      = array(
+		$tags           = [];
+
+		foreach ( $postTypes as $type ) {
+			$tags[] = $type->slug;
+		}
+
+		foreach ( $postCategories as $category ) {
+			$tags[] = $category->slug;
+		}
+
+		$vendors[] = array(
 			'latLng' => $latLng,
 			'name'   => $post->post_title,
-			'tags'   => array_merge( $postTypes, $postCategories ),
+			'tags'   => $tags,
 		);
 	}?>
 	<main class="wrapper<?php echo is_active_sidebar( 'sidebar' ) ? ' two-column' : null; ?>" role="main">
-		<div class="three-column">	
-			<div class="vendors">
+		<div class="grid">	
+			<div class="span-two">
 				<h2>Vendors</h2>
+				<h3>Filter By:</h3>
+				<select onchange="filterMarkers(this.value);">
+					<option value="">Reset Filter</option>
+					<?php foreach ( $filters as $filter ) : ?>
+						<option value="<?php echo $filter->slug; ?>"><?php echo $filter->name; ?></option>
+					<?php endforeach; ?>
+				</select>
 				<ul>
 				<?php foreach ( $vendors as $key => $marker ) : ?>
 					<li class="entry-content">
@@ -88,39 +105,7 @@ if ( $query->have_posts() ) :
 				<?php endforeach; ?>
 				</ul>
 			</div>
-			<div class="tags">
-				<h2>Filters</h2>
-				<ul>
-					<li class="entry-content">
-						<a href="
-						<?php
-						echo add_query_arg(
-							array(
-								'vendor_type'     => null,
-								'vendor_category' => null,
-							)
-						);
-						?>
-						">Reset Filters</a>
-					</li>
-				<?php foreach ( $types as $key => $type ) : ?>
-					<li class="entry-content">
-						<?php // echo '<pre>' . print_r($type, true) . '</pre>'; ?>
-						<a href="<?php echo add_query_arg( 'vendor_type', $type->slug ); ?>">
-						<?php echo $type->name; ?>
-						</a>
-					</li>
-				<?php endforeach; ?>
-				<?php foreach ( $categories as $key => $category ) : ?>
-					<li class="entry-content">
-						<a href="<?php echo add_query_arg( 'vendor_category', $category->slug ); ?>">
-						<?php echo $category->name; ?>
-						</a>
-					</li>
-				<?php endforeach; ?>
-				</ul>
-			</div>
-			<div id="map"></div>
+			<div class="span-ten" id="map"></div>
 		</div>
 		<?php if ( is_active_sidebar( 'sidebar' ) ) : ?>
 		<aside>
@@ -131,6 +116,18 @@ if ( $query->have_posts() ) :
 	<script>
 		const markers = [];
 		const markerData = <?php echo json_encode( $vendors ); ?>;
+
+		filterMarkers = function(val) {
+			for (i = 0; i < markerData.length; i++) {
+				console.log(val);
+				console.log(markerData[i]);
+				if(markerData[i].tags.indexOf(val) >= 0 || !val){
+					markers[i].setVisible(true);
+				} else {          
+					markers[i].setVisible(false);
+				}  
+			}
+		}
 
 		function initMap() {
 			const infowindow = new google.maps.InfoWindow();
