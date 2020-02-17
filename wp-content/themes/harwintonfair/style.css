@@ -115,6 +115,60 @@ aside em {
   grid-column-gap: 2.5rem;
 }
 
+.grid {
+  display: grid;
+  grid-column-gap: 2.5rem;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+}
+
+.span-one {
+  grid-column: span 1;
+}
+
+.span-two {
+  grid-column: span 2;
+}
+
+.span-three {
+  grid-column: span 3;
+}
+
+.span-four {
+  grid-column: span 4;
+}
+
+.span-five {
+  grid-column: span 5;
+}
+
+.span-six {
+  grid-column: span 6;
+}
+
+.span-seven {
+  grid-column: span 7;
+}
+
+.span-eight {
+  grid-column: span 8;
+}
+
+.span-nine {
+  grid-column: span 9;
+}
+
+.span-ten {
+  grid-column: span 10;
+}
+
+.span-eleven {
+  grid-column: span 11;
+}
+
+.span-twelve {
+  grid-column: span 12;
+}
+
 .two-column {
   display: grid;
   grid-template-columns: 1fr 13rem;
