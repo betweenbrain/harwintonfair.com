@@ -65,10 +65,13 @@ if ( $query->have_posts() ) :
 	);
 
 	foreach ( $query->posts as $post ) {
-		$latLng    = get_post_meta( $post->ID, 'latLng', true );
-		$vendors[] = array(
+		$latLng         = get_post_meta( $post->ID, 'latLng', true );
+		$postCategories = get_the_terms( $post->ID, 'vendor_category' );
+		$postTypes      = get_the_terms( $post->ID, 'vendor_type' );
+		$vendors[]      = array(
 			'latLng' => $latLng,
 			'name'   => $post->post_title,
+			'tags'   => array_merge( $postTypes, $postCategories ),
 		);
 	}?>
 	<main class="wrapper<?php echo is_active_sidebar( 'sidebar' ) ? ' two-column' : null; ?>" role="main">
